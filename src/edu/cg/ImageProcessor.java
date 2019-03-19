@@ -127,9 +127,8 @@ public class ImageProcessor extends FunctioalForEachLoops {
 	         int neighborX = Math.min(px, inWidth - 1);
 	         int neighborY = Math.min(py, inHeight - 1);
 	         ans.setRGB(x, y, workingImage.getRGB(neighborX, neighborY));
-	     });
-	        
-	     popForEachParameters();
+	     });   
+	     
 	     return ans;
 	}
 }
