@@ -118,7 +118,6 @@ public class ImageProcessor extends FunctioalForEachLoops {
 	public BufferedImage nearestNeighbor() {
 		 logger.log("applies nearest neighbor interpolation.");
 	     BufferedImage ans = newEmptyOutputSizedImage();
-	     pushForEachParameters();
 	     setForEachOutputParameters();
 	     
 	     forEach((y, x) -> {
