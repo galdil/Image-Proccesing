@@ -90,7 +90,7 @@ public class ImageProcessor extends FunctioalForEachLoops {
 	}
 
 	public BufferedImage greyscale() {
-		logger.log("Prepareing for greyscale changing...");
+		logger.log("creates a greyscale image.");
 
 		int r = rgbWeights.redWeight;
 		int g = rgbWeights.greenWeight;
@@ -111,7 +111,6 @@ public class ImageProcessor extends FunctioalForEachLoops {
 			ans.setRGB(x, y, greyColor.getRGB());
 		});
 
-		logger.log("Changing to greyscale done!");
 
 		return ans;
 	}
