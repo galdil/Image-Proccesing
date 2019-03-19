@@ -116,8 +116,20 @@ public class ImageProcessor extends FunctioalForEachLoops {
 	}
 
 	public BufferedImage nearestNeighbor() {
-		// TODO: Implement this method, remove the exception.
-		
-		throw new UnimplementedMethodException("nearestNeighbor");
+		 logger.log("applies nearest neighbor interpolation.");
+	     BufferedImage ans = newEmptyOutputSizedImage();
+	     pushForEachParameters();
+	     setForEachOutputParameters();
+	     
+	     forEach((y, x) -> {
+	    	 int px = Math.round(x * inWidth / outWidth);
+	         int py = Math.round(y * inHeight / outHeight);
+	         int neighborX = Math.min(px, inWidth - 1);
+	         int neighborY = Math.min(py, inHeight - 1);
+	         ans.setRGB(x, y, workingImage.getRGB(neighborX, neighborY));
+	     });
+	        
+	     popForEachParameters();
+	     return ans;
 	}
 }
