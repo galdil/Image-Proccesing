@@ -1,5 +1,6 @@
 package edu.cg;
 
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 
 public class SeamsCarver extends ImageProcessor {
@@ -13,7 +14,9 @@ public class SeamsCarver extends ImageProcessor {
 	// MARK: Fields
 	private int numOfSeams;
 	private ResizeOperation resizeOp;
-	boolean[][] imageMask;
+	private boolean[][] imageMask;
+	private int [][] greyScaledImageMatrix;
+	
 	
 	// TODO: Add some additional fields
 
@@ -36,9 +39,14 @@ public class SeamsCarver extends ImageProcessor {
 			resizeOp = this::reduceImageWidth;
 		else
 			resizeOp = this::duplicateWorkingImage;
-
-		// TODO: You may initialize your additional fields and apply some preliminary
-		// calculations.
+		
+		this.logger.log("begins preliminary calculations.");
+		
+		//if width or height remains the same we won't do this part
+		if(numOfSeams > 0) {
+			
+		}
+		
 
 		this.logger.log("preliminary calculations were ended.");
 	}
@@ -63,6 +71,7 @@ public class SeamsCarver extends ImageProcessor {
 	}
 
 	public boolean[][] getMaskAfterSeamCarving() {
+
 		// TODO: Implement this method, remove the exception.
 		// This method should return the mask of the resize image after seam carving. Meaning,
 		// after applying Seam Carving on the input image, getMaskAfterSeamCarving() will return
@@ -72,5 +81,14 @@ public class SeamsCarver extends ImageProcessor {
 		// Once you remove (replicate) the chosen seams from the input image, you need to also
 		// remove (replicate) the matching entries from the mask as well.
 		throw new UnimplementedMethodException("getMaskAfterSeamCarving");
+	}
+
+	private void generateGreyscaleImage(){
+		this.greyScaledImageMatrix =  new int[this.inHeight][this.inWidth];
+		BufferedImage greyScaledImage = this.greyscale();
+		forEach((y, x) -> {
+			int grey = new Color(greyScaledImage.getRGB(x, y)).getRed();
+			this.greyScaledImageMatrix[y][x] = grey;
+		});
 	}
 }
