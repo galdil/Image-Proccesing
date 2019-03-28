@@ -17,7 +17,7 @@ public class ImageProcessor extends FunctioalForEachLoops {
 
 	// MARK: constructors
 	public ImageProcessor(Logger logger, BufferedImage workingImage, RGBWeights rgbWeights, int outWidth,
-			int outHeight) {
+						  int outHeight) {
 		super(); // initializing for each loops...
 
 		this.logger = logger;
@@ -95,7 +95,7 @@ public class ImageProcessor extends FunctioalForEachLoops {
 		int r = rgbWeights.redWeight;
 		int g = rgbWeights.greenWeight;
 		int b = rgbWeights.blueWeight;
-		int weightAmount = rgbWeights.weightsAmount; 
+		int weightAmount = rgbWeights.weightsAmount;
 
 		BufferedImage ans = newEmptyInputSizedImage();
 
@@ -104,7 +104,7 @@ public class ImageProcessor extends FunctioalForEachLoops {
 			int red = r * c.getRed();
 			int green = g * c.getGreen();
 			int blue = b * c.getBlue();
-			
+
 			int grey = (red + green + blue) / weightAmount;
 			Color greyColor = new Color(grey, grey, grey);
 
@@ -116,18 +116,18 @@ public class ImageProcessor extends FunctioalForEachLoops {
 	}
 
 	public BufferedImage nearestNeighbor() {
-		 logger.log("applies nearest neighbor interpolation.");
-	     BufferedImage ans = newEmptyOutputSizedImage();
-	     setForEachOutputParameters();
-	     
-	     forEach((y, x) -> {
-	    	 int px = Math.round(x * inWidth / outWidth);
-	         int py = Math.round(y * inHeight / outHeight);
-	         int neighborX = Math.min(px, inWidth - 1);
-	         int neighborY = Math.min(py, inHeight - 1);
-	         ans.setRGB(x, y, workingImage.getRGB(neighborX, neighborY));
-	     });   
-	     
-	     return ans;
+		logger.log("applies nearest neighbor interpolation.");
+		BufferedImage ans = newEmptyOutputSizedImage();
+		setForEachOutputParameters();
+
+		forEach((y, x) -> {
+			int px = Math.round(x * inWidth / outWidth);
+			int py = Math.round(y * inHeight / outHeight);
+			int neighborX = Math.min(px, inWidth - 1);
+			int neighborY = Math.min(py, inHeight - 1);
+			ans.setRGB(x, y, workingImage.getRGB(neighborX, neighborY));
+		});
+
+		return ans;
 	}
 }
